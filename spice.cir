@@ -1,0 +1,63 @@
+aspice
+.include 45nm_HP.pm
+*.model NMOS NMOS level=8 version=3.3.0
+*.model PMOS PMOS level=8 version=3.3.0
+
+**************************************
+
+*Descricao do circuito
+
+**fontes
+Va wa GND 0V
+Vb wb GND 1V
+Vc wc GND 0V
+
+Vdd vdd GND 1V
+**XOR
+M1 w12 wa vdd vdd   PMOS L=45n W=90n
+M2 w12 wa GND GND   NMOS L=45n W=90n
+M3 w34 wb wa vdd PMOS L=45n W=90n
+M4 w34 wb w12 GND  NMOS L=45n W=90n
+M5 wa  wa w34 vdd PMOS L=45n W=90n
+M6 wa w12 w34 GND  NMOS L=45n W=90n
+
+** AND
+M7 w78 wa vdd vdd PMOS L=45n W=90n
+M8 w78 wb vdd vdd PMOS L=45n W=90n
+M9 w910 wa w78 GND  NMOS L=45n W=90n
+M10 w910 wb GND GND   NMOS L=45n W=90n
+M11 w1112 w78 vdd vdd PMOS L=45n W=90n
+M12 w1112 w78 GND GND NMOS L=45n W=90n
+
+**XOR
+M13 w1516 w34 vdd vdd   PMOS L=45n W=90n
+M14 w1516 w34 GND GND   NMOS L=45n W=90n
+M15 sum wc w34 vdd PMOS L=45n W=90n
+M16 sum wc w1516 GND  NMOS L=45n W=90n
+M17 w34  w34 sum vdd PMOS L=45n W=90n
+M18 w34 w1112 sum GND  NMOS L=45n W=90n
+
+** AND
+M19 w1920 wa vdd vdd PMOS L=45n W=90n
+M20 w1920 w34 vdd vdd PMOS L=45n W=90n
+M21 w910 wa w1920 GND  NMOS L=45n W=90n
+M22 w910 w34 GND GND   NMOS L=45n W=90n
+M23 w2324 w1920 vdd vdd PMOS L=45n W=90n
+M24 w2324 w1920 GND GND NMOS L=45n W=90n
+
+** OR
+M25 w2526 w2324 vdd vdd   PMOS L=45n W=90n
+M26 w2526 w1112 w2627 vdd PMOS L=45n W=90n
+M27 w2627 w1112 GND GND  NMOS L=45n W=90n
+M28 w2627 w2324 GND GND NMOS L=45n W=90n
+M29 carry w2627 vdd vdd PMOS L=45n W=90n
+M30 carry w2627 GND GND   NMOS L=45n W=90n
+
+
+*Parametros de Simulação
+.op
+run
+*print w34 sum w1112 w2324 carry
+
+
+.end
