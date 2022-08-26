@@ -1,0 +1,28 @@
+aspice
+*.include 45nm_HP.pm
+.model NMOS NMOS level=8 version=3.3.0
+.model PMOS PMOS level=8 version=3.3.0
+
+**************************************
+
+*Descricao do circuito
+
+**fontes
+Va wa GND 0V
+Vb wb GND 0V
+Vc wc GND 1V
+
+Vdd vdd GND 1V
+**XOR
+M1 w12 wa vdd vdd   PMOS L=45n W=90n
+M2 w12 wa GND GND   NMOS L=45n W=90n
+M3 w34 wb wa vdd PMOS L=45n W=90n
+M4 w34 wb w12 GND  NMOS L=45n W=90n
+M5 w34 wa wa vdd PMOS L=45n W=90n
+M6 w34 w12 wa GND  NMOS L=45n W=90n
+
+*Parametros de Simulação
+*.op
+
+
+.end

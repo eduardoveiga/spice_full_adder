@@ -1,0 +1,82 @@
+aspice
+.include 45nm_HP.pm
+*.model NMOS NMOS level=8 version=3.3.0
+*.model PMOS PMOS level=8 version=3.3.0
+
+**************************************
+
+*Descricao do circuito
+
+**fontes
+Va wa GND 0
+Vb wb GND 0
+Vc wc GND 0
+ 
+ Vdd vdd GND 1V
+
+C1 sum 0  1f
+C2 carry 0 1f
+
+iexp 0 aux exp(0 40u  200p 10p 200.01p 320p)
+
+vobs aux carry 0
+
+
+
+**XOR
+M1 w12 wa vdd vdd   PMOS L=45n W=90n
+M2 w12 wa GND GND   NMOS L=45n W=90n
+M3 w34 wb wa vdd PMOS L=45n W=90n
+M4 w34 wb w12 GND  NMOS L=45n W=90n
+M5 w34  wa wb vdd PMOS L=45n W=90n
+M6 w34 w12 wb GND  NMOS L=45n W=90n
+
+** AND
+M7 w78 wa vdd vdd PMOS L=45n W=90n
+M8 w78 wb vdd vdd PMOS L=45n W=90n
+M9 w910 wa w78 GND  NMOS L=45n W=90n
+M10 w910 wb GND GND   NMOS L=45n W=90n
+M11 w1112 w78 vdd vdd PMOS L=45n W=90n
+M12 w1112 w78 GND GND NMOS L=45n W=90n
+
+**XOR
+M13 sum wc w34 vdd PMOS L=45n W=90n
+M14 sum wc w1516 GND  NMOS L=45n W=90n
+M15 w1516 w34 vdd vdd   PMOS L=45n W=90n
+M16 w1516 w34 GND GND   NMOS L=45n W=90n
+M17 sum  w34 wc vdd PMOS L=45n W=90n
+M18 sum w1516 wc GND  NMOS L=45n W=90n
+
+
+
+
+
+** AND
+M19 w1920 wc vdd vdd PMOS L=45n W=90n
+M20 w1920 w34 vdd vdd PMOS L=45n W=90n
+M21 w2122 wc w1920 GND  NMOS L=45n W=90n
+M22 w2122 w34 GND GND   NMOS L=45n W=90n
+M23 w2324 w1920 vdd vdd PMOS L=45n W=90n
+M24 w2324 w1920 GND GND NMOS L=45n W=90n
+
+** OR
+M25 w2526 w2324 vdd vdd   PMOS L=45n W=90n
+M26 w2526 w1112 w2627 vdd PMOS L=45n W=90n
+M27 w2627 w1112 GND GND  NMOS L=45n W=90n
+M28 w2627 w2324 GND GND NMOS L=45n W=90n
+M29 carry w2627 vdd vdd PMOS L=45n W=90n
+M30 carry w2627 GND GND   NMOS L=45n W=90n
+
+.control
+run
+*plot wa wb+2 wc+4 sum+6 carry+8 w78+10
+quit
+.endc
+
+.tran 1p 2000p
+
+.measure tran sum_a trig V(sum) val=0.5 rise=1 targ V(sum) val=0.5 fall=1
+.measure tran carry_a trig V(carry) val=0.5 rise=1 targ V(carry) val=0.5 fall=1
+.measure tran sum_a trig V(sum) val=0.5 fall=1 targ V(sum) val=0.5 rise=1
+.measure tran carry_a trig V(carry) val=0.5 rise=1 targ V(carry) val=0.5 fall=1
+.end

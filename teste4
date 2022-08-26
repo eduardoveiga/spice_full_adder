@@ -1,0 +1,56 @@
+******
+** ngspice-36 : Circuit level simulation program
+** The U. C. Berkeley CAD Group
+** Copyright 1985-1994, Regents of the University of California.
+** Copyright 2001-2020, The ngspice team.
+** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html
+** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html
+** Creation Date: Sat Apr 23 09:48:14 UTC 2022
+******
+
+No compatibility mode selected!
+
+
+Circuit: aspice
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+wa                                           0
+wb                                           0
+wc                                           0
+vdd                                          1
+sum                                4.49845e-06
+aux                                   0.999983
+w12                                   0.999983
+w34                                5.17459e-06
+w78                                   0.999999
+w910                                  0.090658
+w1112                              1.50616e-06
+w1516                                 0.999983
+w1920                                 0.999999
+w2324                              1.50619e-06
+w2526                                 0.999982
+w2627                                 0.999965
+carry                              1.15335e-06
+vobs#branch                                  0
+vdd#branch                        -1.27075e-08
+vc#branch                          1.85499e-09
+vb#branch                          2.09705e-09
+va#branch                          2.67714e-10
+
+
+No. of Data Rows : 2078
+
+  Measurements for Transient Analysis
+
+tplh_a              =  4.116442e-10 targ=  6.215303e-10 trig=  2.098861e-10
+tplh_b              =  1.437274e-10 targ=  1.157501e-09 trig=  1.013774e-09
+tplh_c              =  1.964590e-10 targ=  1.609452e-09 trig=  1.412993e-09
+
+ngspice-36 done

@@ -1,0 +1,24 @@
+spice
+.include 45nm_HP.pm
+
+**************************************
+
+*Descricao do circuito
+
+**fontes
+Va wa GND 1V
+Vb wb GND 1V
+Vc wc GND 1V
+
+Vcc vcc GND 1V
+
+**XOR
+MP1 vdd wa wt12 vdd  PMOS L=45n W=90n
+MP2 wt12 wa GND GND  NMOS L=45n W=90n
+
+
+*Parametros de Simulação
+*.op
+
+
+.end
